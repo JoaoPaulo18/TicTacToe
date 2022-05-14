@@ -1,0 +1,229 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+:root{
+  --color:black;
+}
+html,body{
+  height: 100%;
+  max-height: 90vh;
+  transition: .5s;
+}
+body{
+  position: relative;
+}
+html.black{
+  background: black;
+}
+html.black:root{
+  --color:white;
+}
+.Maincontainer{
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.chooseColor{
+  position: absolute;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+#color{
+  font-size: 2rem;
+  color: var(--color);
+}
+#Color{
+  display: inline-block;
+  border-radius: 80px;
+  border: 2px solid var(--color);
+  height: 30px;
+  width: 60px;
+  cursor: pointer;
+  position: relative;
+}
+
+#Color::after{
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: var(--color);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  transition: left .5s;
+}
+#Color.clicked::after{
+left:50%
+}
+
+.Gamecontainer{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.separetor{
+  height: 8px;
+  width: calc(160px * 3 + 5px);
+  background: black;
+  position: absolute;
+}
+.one{
+  top: 50%;
+  left: 80px;
+  transform: rotate(90deg);
+}
+.two{
+  top: 50%;
+  left: -80px;
+  transform: rotate(90deg);
+}
+.three{
+ top: 160px; 
+}
+.four{
+  top: 320px;
+}
+.Gamecontainer span{
+  width: 160px;
+  height: 160px;
+  cursor: pointer;
+  position: relative;
+}
+
+.Gamecontainer span::after{
+content: 'X';
+display: none;
+font-size: 6rem;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+color: black;
+}
+body[data-type="O"] .Gamecontainer span:hover::after{
+content: 'O';
+}
+body[data-type="X"] .Gamecontainer span:hover::after{
+  content: 'X';
+  }
+
+.Gamecontainer span:hover::after,.Gamecontainer span.active::after{
+  display: block;
+}
+.Gamecontainer span.active[data-choose="X"]::after{
+  content: 'X';
+}
+.Gamecontainer span.active[data-choose="O"]::after{
+  content: 'O';
+}
+.Gamecontainer span.active{
+  pointer-events: none;
+}
+html.black .Gamecontainer span::after{
+  animation: shineChooses .6s ease-in-out alternate infinite;
+}
+
+html.black .Gamecontainer .separetor{
+  animation: shine .6s ease-in-out infinite alternate;
+}
+.result{
+  font-size: 2rem;
+  padding: 1rem;
+}
+html.black .result{
+  color: white;
+}
+@keyframes shineChooses {
+    from{
+      color: orange;
+    }
+    to{
+      color: red;
+    }
+}
+@keyframes shine {
+    from{
+    box-shadow:1px 1px 25px 5px orange;
+    background: red;
+    }
+    to{
+      background: orange;
+    box-shadow:.5px .5px 20px 4px red;
+    }
+}
+#Reset{
+  font-size: 2rem;
+  border-radius: 10px;
+  border: 1px solid;
+  padding: 1rem 2rem;
+  max-width: max-content;
+  justify-self: center;
+  overflow-x: hidden;
+  box-shadow: 2px 2px 0px 1px rgba(44, 44, 44, .5);
+  cursor: pointer;
+  transition: .1s;
+}
+#Reset:hover{
+  transform: scale(.96);
+  box-shadow: 1px 1px 0px 0px rgba(44, 44, 44, .5);
+}
+html.black #Reset{
+  box-shadow: 2px 2px 0px 1px rgba(255, 255, 255, .5);
+}
+html.black #Reset:hover{
+  transform: scale(.96);
+  box-shadow: 1px 1px 0px 0px rgba(255, 255, 255, .5);
+}
+
+@media (max-width:510px) {
+  body[data-type="O"] .Gamecontainer span:hover::after{
+    content: 'X';
+    }
+    body[data-type="X"] .Gamecontainer span:hover::after{
+      content: 'O';
+      }
+  .result{
+    font-size: 1.5rem;
+  }
+  .chooseColor{
+    top: 40px;
+    left: 0;
+    }
+  #color{
+    font-size: 1.5rem;
+  }
+  .Gamecontainer{
+    align-self: end;
+  }
+  .Gamecontainer span{
+    width: 80px;
+    height: 80px;
+  }
+  .Gamecontainer span::after{
+    font-size: 4rem;
+  }
+  .Gamecontainer .separetor{
+    height: 2px;
+    width: calc(80px * 3 + 10px);
+  }
+  .one{
+    left: 35px;
+  }
+  .two{
+    left: -45px;
+  }
+  .four{
+    top: 80px;
+  }
+}
