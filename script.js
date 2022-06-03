@@ -15,14 +15,15 @@ let markeds = {
   column1:0,column2:0,column3:0,
   angular1:0,angular2:0
 }
-selectors.forEach(selector => selector.addEventListener('click',RandomClick))
+  selectors.forEach(selector => selector.addEventListener('click',RandomClick));
+  selectors.forEach(selector => selector.addEventListener('touchstart',RandomClick));
 
 
 
 function RandomClick(e){
   e.target.classList.add("active")
-  body.dataset.type == "O" ? e.target.dataset.choose = "O" : e.target.dataset.choose = "X";
-  body.dataset.type == "O" ?  body.dataset.type = "X" :  body.dataset.type = "O";
+  body.dataset.type == "X" ? e.target.dataset.choose = "X" : e.target.dataset.choose = "O";
+  body.dataset.type == "X" ?  body.dataset.type = "O" :  body.dataset.type = "X";
 
   Verification(e.target);
 }
